@@ -1,6 +1,4 @@
-<div class = "comment-textarea">
-  <%= form_with model: [book, book_comment], local: false do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control form-control-lg" %>
-    <%= f.submit "送信", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-  <% end %>
-</div>
+<%= form_with model: [book, book_comment], local: false do |f| %>
+  <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "form-control form-control-lg comment-textarea" %>
+  <%= f.submit "送信", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+<% end %>
