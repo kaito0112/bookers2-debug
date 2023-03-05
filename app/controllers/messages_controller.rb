@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :check, only: [:message]
-  
+
   def message
     @message = Message.new
     @messages = Message.where(send_user_id: current_user.id,
