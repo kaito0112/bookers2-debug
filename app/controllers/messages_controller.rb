@@ -27,20 +27,19 @@ class MessagesController < ApplicationController
   end
 
   private
-
-  def message_params
-    params.require(:message).permit(:receive_user_id, :chat)
-  end
-
-  def check
-    # #自分自身とのDMを防ぐ
-    if params[:id] == current_user.id
-      redirect_back fallback_location: root_path
-    else
-      ## 相互にフォローしているかの確認。
-      check1 = Relationship.exists?(followed_id: params[:id], follower_id: current_user.id)
-      check2 = Relationship.exists?(follower_id: params[:id], followed_id: current_user.id)
-      redirect_back fallback_location: root_path if !check1 || !check2
+    def message_params
+      params.require(:message).permit(:receive_user_id, :chat)
     end
-  end
+
+    def check
+      # #自分自身とのDMを防ぐ
+      if params[:id] == current_user.id
+        redirect_back fallback_location: root_path
+      else
+        ## 相互にフォローしているかの確認。
+        check1 = Relationship.exists?(followed_id: params[:id], follower_id: current_user.id)
+        check2 = Relationship.exists?(follower_id: params[:id], followed_id: current_user.id)
+        redirect_back fallback_location: root_path if !check1 || !check2
+      end
+    end
 end

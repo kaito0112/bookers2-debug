@@ -2,6 +2,9 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    unless ReadCount.find_by(user_id: current_user.id, book_id: @book.id)
+      current_user.read_counts.create(book_id: @book.id)
+    end
     @books = Book.new
     @book_comment = BookComment.new
   end
@@ -47,9 +50,8 @@ class BooksController < ApplicationController
   end
 
   private
-
-  def book_params
-    params.require(:book).permit(:title, :body)
-  end
+    def book_params
+      params.require(:book).permit(:title, :body)
+    end
 
 end
