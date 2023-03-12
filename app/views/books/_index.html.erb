@@ -29,14 +29,13 @@
               size: 36,
               starOff: '<%= asset_path('star-off.png') %>',
               starOn: '<%= asset_path('star-on.png') %>',
-              half: false,
               readOnly: true,
               score: <%= book.star %>,
             });
           </script>
         </td>
         <!--星レビュー-->
-        
+
         <td><%= book.book_comments.count %>コメント</td>
         <td>閲覧数：<%= book.read_counts.count %></td>
       </tr>
